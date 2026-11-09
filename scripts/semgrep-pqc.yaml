@@ -1,0 +1,67 @@
+# Règles Semgrep d'exemple pour repérer les usages de cryptographie vulnérable au quantique.
+# Usage : semgrep scan --config scripts/semgrep-pqc.yaml .
+rules:
+  - id: java-quantum-vulnerable-keypair
+    languages: [java]
+    severity: WARNING
+    message: >
+      Génération de clé $ALG vulnérable à un ordinateur quantique. Passer par le service
+      crypto centralisé (crypto-agilité) et prévoir ML-KEM / ML-DSA.
+    metadata: { category: pqc, cwe: "CWE-327" }
+    patterns:
+      - pattern: KeyPairGenerator.getInstance("$ALG", ...)
+      - metavariable-regex:
+          metavariable: $ALG
+          regex: (?i)^(RSA|EC|DSA|DH|DiffieHellman|X25519|X448|XDH|Ed25519|Ed448|EdDSA)$
+
+  - id: java-quantum-vulnerable-signature
+    languages: [java]
+    severity: WARNING
+    message: Signature $ALG vulnérable au quantique — prévoir ML-DSA (ou hybride).
+    metadata: { category: pqc, cwe: "CWE-327" }
+    patterns:
+      - pattern: Signature.getInstance("$ALG", ...)
+      - metavariable-regex:
+          metavariable: $ALG
+          regex: (?i).*(RSA|ECDSA|DSA|EdDSA|Ed25519).*
+
+  - id: java-hardcoded-cipher-transformation
+    languages: [java]
+    severity: INFO
+    message: Transformation cryptographique codée en dur ("$T") — anti-pattern de crypto-agilité.
+    metadata: { category: crypto-agility }
+    pattern: Cipher.getInstance("$T", ...)
+
+  - id: python-cryptography-vulnerable-keygen
+    languages: [python]
+    severity: WARNING
+    message: Génération de clé asymétrique classique vulnérable au quantique.
+    metadata: { category: pqc, cwe: "CWE-327" }
+    pattern-either:
+      - pattern: cryptography.hazmat.primitives.asymmetric.rsa.generate_private_key(...)
+      - pattern: cryptography.hazmat.primitives.asymmetric.ec.generate_private_key(...)
+      - pattern: cryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey.generate()
+      - pattern: cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey.generate()
+      - pattern: cryptography.hazmat.primitives.asymmetric.dh.generate_parameters(...)
+
+  - id: go-tls-curvepreferences-without-mlkem
+    languages: [go]
+    severity: WARNING
+    message: >
+      CurvePreferences restreint explicitement les groupes TLS sans X25519MLKEM768 :
+      cela désactive l'échange hybride proposé par défaut depuis Go 1.24.
+    metadata: { category: pqc }
+    patterns:
+      - pattern: |
+          tls.Config{..., CurvePreferences: $PREFS, ...}
+      - metavariable-pattern:
+          metavariable: $PREFS
+          patterns:
+            - pattern-not-regex: X25519MLKEM768
+
+  - id: weak-legacy-algorithms
+    languages: [java, python, go, javascript, typescript, csharp]
+    severity: ERROR
+    message: Algorithme obsolète indépendamment du quantique (3DES/RC4/MD5/SHA-1).
+    metadata: { category: legacy-crypto, cwe: "CWE-327" }
+    pattern-regex: (?i)["'](DESede|TripleDES|3DES|RC4|ARCFOUR|MD5|SHA-?1)["']

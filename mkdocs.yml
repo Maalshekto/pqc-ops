@@ -1,0 +1,121 @@
+site_name: PQC-Ops
+site_description: Migration vers la cryptographie post-quantique — guide opérationnel DevSecOps pour le secteur bancaire
+site_url: https://maalshekto.github.io/pqc-ops/
+repo_url: https://github.com/Maalshekto/pqc-ops
+repo_name: Maalshekto/pqc-ops
+edit_uri: edit/main/docs/
+copyright: © 2026 Maalshekto — PQC-Ops
+
+theme:
+  name: material
+  language: fr
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: Passer en mode sombre
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: Passer en mode clair
+  icon:
+    logo: material/shield-lock-outline
+    repo: fontawesome/brands/github
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - content.action.edit
+    - toc.follow
+
+plugins:
+  - search:
+      lang: fr
+  - tags
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets:
+      auto_append:
+        - includes/abreviations.md
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+extra_css:
+  - assets/extra.css
+
+nav:
+  - Accueil: index.md
+  - Fondamentaux:
+      - fondamentaux/index.md
+      - La menace quantique: fondamentaux/menace.md
+      - Algorithmes standardisés: fondamentaux/algorithmes.md
+      - Normes et réglementation: fondamentaux/reglementation.md
+  - Stratégie:
+      - strategie/index.md
+      - Inventaire et CBOM: strategie/inventaire.md
+      - Priorisation des risques: strategie/priorisation.md
+      - Crypto-agilité et hybridation: strategie/crypto-agilite.md
+      - Feuille de route: strategie/feuille-de-route.md
+  - Infrastructure:
+      - infrastructure/index.md
+      - TLS et reverse proxies: infrastructure/tls.md
+      - VPN IPsec: infrastructure/ipsec.md
+      - SSH: infrastructure/ssh.md
+      - PKI et HSM: infrastructure/pki-hsm.md
+      - Kubernetes et service mesh: infrastructure/kubernetes.md
+  - Tests réseau:
+      - tests/index.md
+      - Laboratoire de test: tests/laboratoire.md
+      - Tests d'interopérabilité TLS: tests/tls.md
+      - Middleboxes et MTU: tests/middleboxes.md
+      - Performance: tests/performance.md
+      - Plan de tests: tests/plan-de-tests.md
+  - DevSecOps:
+      - devsecops/index.md
+      - Pipeline CI/CD: devsecops/pipeline.md
+      - Policy as code: devsecops/policy-as-code.md
+      - Supervision: devsecops/supervision.md
+  - Contexte bancaire:
+      - banque/index.md
+      - Cadre réglementaire: banque/cadre.md
+      - Flux de paiement et HSM: banque/paiement.md
+      - Gouvernance et habilitation: banque/gouvernance.md
+  - Annexes:
+      - Glossaire: annexes/glossaire.md
+      - Références: annexes/references.md

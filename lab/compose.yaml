@@ -1,0 +1,19 @@
+# Laboratoire PQC — docker compose up --build -d
+services:
+  serveur:
+    build: .
+    command: ["nginx", "-g", "daemon off;"]
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    networks: [labo]
+    hostname: serveur
+
+  client:
+    build: .
+    command: ["sleep", "infinity"]
+    cap_add: [NET_ADMIN]   # pour tc netem (latence, perte, MTU)
+    networks: [labo]
+    depends_on: [serveur]
+
+networks:
+  labo: {}

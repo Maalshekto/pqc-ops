@@ -1,0 +1,8 @@
+:root {
+  --md-admonition-icon--menace: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14h-2V9h2m0 9h-2v-2h2M1 21h22L12 2 1 21Z"/></svg>');
+}
+.md-typeset table:not([class]) { font-size: .72rem; }
+.md-typeset .grid.cards > ul > li { border-radius: .4rem; }
+.statut-ok { color: #2e7d32; font-weight: 600; }
+.statut-ko { color: #c62828; font-weight: 600; }
+.statut-warn { color: #ef6c00; font-weight: 600; }
