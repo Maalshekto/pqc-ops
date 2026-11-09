@@ -3,7 +3,7 @@
 Guide opérationnel de **migration vers la cryptographie post-quantique (PQC)** du point de vue d'un·e DevSecOps
 habilité·e à conduire la migration et les tests réseau et infrastructure **en contexte bancaire**.
 
-Site publié : https://maalshekto.github.io/pqc-ops/
+Site publié : https://pqc-ops.com/
 
 ## Contenu
 

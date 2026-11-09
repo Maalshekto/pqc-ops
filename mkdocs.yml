@@ -1,6 +1,6 @@
 site_name: PQC-Ops
 site_description: Migration vers la cryptographie post-quantique — guide opérationnel DevSecOps pour le secteur bancaire
-site_url: https://maalshekto.github.io/pqc-ops/
+site_url: https://pqc-ops.com/
 repo_url: https://github.com/Maalshekto/pqc-ops
 repo_name: Maalshekto/pqc-ops
 edit_uri: edit/main/docs/
