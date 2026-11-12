@@ -56,6 +56,8 @@ markdown_extensions:
   - tables
   - toc:
       permalink: true
+  - pymdownx.arithmatex:
+      generic: true
   - pymdownx.details
   - pymdownx.highlight:
       anchor_linenums: true
@@ -79,6 +81,10 @@ markdown_extensions:
 extra_css:
   - assets/extra.css
 
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js
+
 nav:
   - Accueil: index.md
   - Fondamentaux:
@@ -86,6 +92,12 @@ nav:
       - La menace quantique: fondamentaux/menace.md
       - Algorithmes standardisés: fondamentaux/algorithmes.md
       - Normes et réglementation: fondamentaux/reglementation.md
+  - Mathématiques:
+      - mathematiques/index.md
+      - Arithmétique modulaire: mathematiques/arithmetique-modulaire.md
+      - Polynômes et anneaux: mathematiques/polynomes.md
+      - La NTT: mathematiques/ntt.md
+      - Réseaux euclidiens et LWE: mathematiques/reseaux-lwe.md
   - Stratégie:
       - strategie/index.md
       - Inventaire et CBOM: strategie/inventaire.md
